@@ -14,5 +14,5 @@ namespace AttendanceCheckerSystem.Models
         public int Present { get; set; }
         public int Absent { get; set; }
 
-    }
+	}
 }

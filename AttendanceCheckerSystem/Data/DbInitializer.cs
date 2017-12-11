@@ -104,9 +104,9 @@ namespace AttendanceCheckerSystem.Data
             {
                 for(int j = 0; j < studentsFromDb.Count(); j++)
                 {
-                    attendance.Add(new AttendMeeting() { MeetingID = meetingsFromDb[i].ID,
-                        StudentID = studentsFromDb[j].ID,
-                        Attend = false
+					attendance.Add(new AttendMeeting() { MeetingID = meetingsFromDb[i].ID,
+						StudentID = studentsFromDb[j].ID,
+						Attend = false
                     });
                 }
             }

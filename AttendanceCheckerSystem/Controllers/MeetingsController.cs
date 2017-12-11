@@ -29,11 +29,27 @@ namespace AttendanceCheckerSystem.Controllers
             return View(sorteddays);
         }
 
-        [HttpPost, ActionName("Attend")]
+		[HttpPost, ActionName("Attendance Summary")]
+		public IActionResult Summary(AttendanceViewModel vm)
+		{
+
+			var selectedList = _context.AttendMeeting.Where(m => m.MeetingID == vm.MeetingID &&
+															 m.StudentID == vm.StudentID);
+
+
+			var studentAttendance =
+
+			_context.SaveChanges();
+
+			return RedirectToAction("StudentAttendanceConfirmed", vm);
+			//return View("StudentAttendanceConfirmed", selected);
+		}
+
+		[HttpPost, ActionName("Attend")]
         public IActionResult StudentAttends(AttendanceViewModel vm)
         {
 
-            var selectedList = _context.AttendMeeting.Where(m => m.MeetingID == vm.MeetingID &&
+            var selectedList =  _context.AttendMeeting.Where(m => m.MeetingID == vm.MeetingID &&
                                                              m.StudentID == vm.StudentID);
 
             var selected = _context.AttendMeeting.Find(selectedList.First().ID);
@@ -46,7 +62,9 @@ namespace AttendanceCheckerSystem.Controllers
             //return View("StudentAttendanceConfirmed", selected);
         }
 
-        public async Task<IActionResult> StudentAttendanceConfirmed(AttendanceViewModel attended)
+		
+
+		public async Task<IActionResult> StudentAttendanceConfirmed(AttendanceViewModel attended)
         {
             var days = await _context.Meetings.ToListAsync();
             var students = await _context.Students.ToListAsync();
